@@ -1,0 +1,17 @@
+
+{
+  "name": "logseq-blocknav",
+  "version": "0.0.1",
+  "author": "KerfuffleV2",
+  "main": "index.html",
+  "description": "Block navigation shortcuts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kerfufflev2/logseq-plugin-blocknav.git"
+  },
+  "license": "MIT",
+  "logseq": {
+    "title": "Block Navigation",
+    "id": "b985d1a5-ed73-472e-8abd-1b51bc293c07"
+  }
+}

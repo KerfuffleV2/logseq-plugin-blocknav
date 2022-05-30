@@ -1,3 +1,5 @@
 .vscode
 *.bak
+*.zip
 *~
+/logseq-blocknav/

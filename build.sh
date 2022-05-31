@@ -4,7 +4,7 @@ PLUGIN_NAME="${1:-logseq-blocknav}"
 LSAPI_VERSION="${2:-0.0.6}"
 mkdir "$PLUGIN_NAME"
 cd "$PLUGIN_NAME"
-cp ../{README.md,LICENSE,index.js} .
+cp ../{README.md,LICENSE,package.json,index.js} .
 sed 's@https://cdn[^"]*@./logseq-api.js@' ../index.html > ./index.html
 curl -fSs \
   "https://cdn.jsdelivr.net/npm/@logseq/libs@${LSAPI_VERSION}" \

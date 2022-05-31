@@ -1,14 +1,13 @@
-# Blocknav
+# Block Navigation
 
 ## Synopsis
 
-Super simple plugin to facilitate block navigation in [Logseq](https://www.logseq.com/).
+Simple plugin to facilitate top-level block navigation in [Logseq](https://www.logseq.com/).
 
 ## Installation
 
-Not currently in the marketplace.
-
-To load, must turn on developer mode in settings and load as an "unpacked plugin" from the Logseq plugins page (`t p`).
+1. **(Recommended)** Install from the plugin marketplace.
+2. Turn on developer mode in settings and load this repo as an "unpacked plugin" from the Logseq plugins page (`t p`).
 
 ## Usage (default keybinds)
 
@@ -28,11 +27,11 @@ Keybind|Action
 
 ## Settings
 
-As of `v0.0.2` the plugin will allow you to disable the default key bindings and optionally provide your own.
+The plugin settings page allows disabling the default key bind set and optionally providing your own.
 
-Changing custom keybinds requires editing the plugin JSON settings.
+Changing custom keybinds requires editing the plugin JSON settings manually. It currently seems necessary to restart Logseq for the changes to be applied. Also see [Possible Issues](#possible-issues).
 
-### Default settings JSON
+### Default Settings JSON
 
 ```json
 { "default-shortcuts": true,
@@ -65,3 +64,38 @@ Key|Type|Description
 `disabled`|boolean|Disables this definition. Defaults to `false`. **(optional)**
 `new`|boolean|Prepend a block if the index is positive, otherwise append. Defaults to `false`. **(optional)**
 `onlySelect`|boolean|**Experimental**: Only select the block, do not edit it. Defaults to `false`. **(optional)**
+
+
+### Keybind Ideas
+
+#### Direct Block Indexing
+
+It's possible to dispense with the `b` prefix for keybinds and just use `1` to edit the first block, `- 1` to edit the last, etc. Here is an example using that approach with `^`, `$` to prepend/append blocks (modeled after regex anchors.)
+
+```json
+{
+  "default-shortcuts": false,
+  "custom-shortcuts": [
+    { "idx": -1, "new": true, "bind": "shift+4", "desc": "Append and edit" },
+    { "idx":  0, "new": true, "bind": "shift+6", "desc": "Prepend and edit" },
+
+    { "idx":  0, "bind": "1",    "desc": "Edit block 1" },
+    { "idx":  1, "bind": "2",    "desc": "Edit block 2" },
+    { "idx":  2, "bind": "3",    "desc": "Edit block 3" },
+    { "idx":  3, "bind": "4",    "desc": "Edit block 4" },
+    { "idx":  4, "bind": "5",    "desc": "Edit block 5" },
+    { "idx": -1, "bind": "- 1", "desc": "Edit block -1" },
+    { "idx": -2, "bind": "- 2", "desc": "Edit block -2" },
+    { "idx": -3, "bind": "- 3", "desc": "Edit block -3" },
+    { "idx": -4, "bind": "- 4", "desc": "Edit block -4" },
+    { "idx": -5, "bind": "- 5", "desc": "Edit block -5" }
+  ],
+  "disabled": false
+}
+
+```
+
+
+### Possible Issues
+
+Invalid data in the settings JSON file is not currently handled very gracefully. If you've edited the that file and are experiencing problems, it's very likely due to something like a trailing comma in one of the entries causing a JSON syntax error. *Solution: Correct the error and restart Logseq.*

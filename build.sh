@@ -1,11 +1,14 @@
 #!env bash
 set -euo pipefail
-PLUGIN_NAME=${1:-logseq-blocknav}
+PLUGIN_NAME="${1:-logseq-blocknav}"
+LSAPI_VERSION="${2:-0.0.6}"
 mkdir "$PLUGIN_NAME"
 cd "$PLUGIN_NAME"
-cp ../README.md .
-sed 's@"\./index\.html"@"./index.js"@' < ../package.json > ./package.json
-curl -Ssl 'https://cdn.jsdelivr.net/npm/@logseq/libs@0.0.6' > index.js
-cat ../index.js >> ./index.js
+cp ../{README.md,LICENSE,index.js} .
+sed 's@https://cdn[^"]*@./logseq-api.js@' ../index.html > ./index.html
+curl -fSs \
+  "https://cdn.jsdelivr.net/npm/@logseq/libs@${LSAPI_VERSION}" \
+  "https://cdn.jsdelivr.net/npm/@logseq/libs@${LSAPI_VERSION}/dist/lsplugin.user.js.LICENSE.txt" \
+  -o ./logseq-api.js -O
 cd ..
-exec zip -r "$PLUGIN_NAME".zip "$PLUGIN_NAME"
+exec zip -r "${PLUGIN_NAME}.zip" "$PLUGIN_NAME"

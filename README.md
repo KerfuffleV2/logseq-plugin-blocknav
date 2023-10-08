@@ -15,7 +15,7 @@ Keybind|Action
 -|-
 `b p`|Prepend empty block and edit
 `b b`|Append empty block and edit
-`b e`|Edit last block in page
+`b l`|Edit last block in page
 `b 1`|Edit first block in page
 …|…
 `b 9`|Edit 9th block in page
